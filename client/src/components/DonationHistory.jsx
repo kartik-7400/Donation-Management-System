@@ -151,6 +151,7 @@ const DonationHistory = ({ donations, loading }) => {
                         <table className="w-full">
                             <thead className="table-header">
                                 <tr>
+                                    <th className="table-cell text-left font-semibold">Campaign</th>
                                     <th className="table-cell text-left font-semibold">Transaction ID</th>
                                     <th className="table-cell text-left font-semibold">Amount</th>
                                     <th className="table-cell text-left font-semibold">Status</th>
@@ -160,6 +161,9 @@ const DonationHistory = ({ donations, loading }) => {
                             <tbody className="divide-y divide-slate-700/50">
                                 {paginatedDonations.map((donation, index) => (
                                     <tr key={donation.id || index} className="table-row">
+                                        <td className="table-cell text-emerald-400 font-medium">
+                                            {donation.campaign?.title || 'General'}
+                                        </td>
                                         <td className="table-cell text-white font-mono text-xs">
                                             {donation.razorpayPaymentId || donation.razorpayOrderId || 'N/A'}
                                         </td>
@@ -195,6 +199,9 @@ const DonationHistory = ({ donations, loading }) => {
                                     </span>
                                 </div>
                                 <div className="space-y-1">
+                                    <p className="text-emerald-400 text-sm font-medium">
+                                        {donation.campaign?.title || 'General Donation'}
+                                    </p>
                                     <p className="text-slate-400 text-xs font-mono truncate">
                                         ID: {donation.razorpayPaymentId || donation.razorpayOrderId || 'N/A'}
                                     </p>

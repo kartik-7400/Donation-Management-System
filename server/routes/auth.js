@@ -5,13 +5,17 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
-// Cookie options for cross-origin support
-const getCookieOptions = () => ({
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production', // true for HTTPS
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // 'none' allows cross-origin
-    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
-});
+// Cookie options - for development on HTTP, we need sameSite: 'lax' and secure: false
+// In production with HTTPS, use sameSite: 'none' and secure: true
+const getCookieOptions = () => {
+    const isHTTPS = process.env.HTTPS === 'true';
+    return {
+        httpOnly: true,
+        secure: isHTTPS, // Only true when using HTTPS
+        sameSite: 'lax', // 'lax' works for same-site and top-level navigation
+        maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+    };
+};
 
 // @route   POST /api/auth/register
 // @desc    Register a new user

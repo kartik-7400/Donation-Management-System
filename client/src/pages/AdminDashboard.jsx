@@ -14,6 +14,11 @@ const AdminDashboard = () => {
     const [campaigns, setCampaigns] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    // Pagination state
+    const [usersPage, setUsersPage] = useState(1);
+    const [donationsPage, setDonationsPage] = useState(1);
+    const itemsPerPage = 10;
+
     // Campaign form state
     const [showCampaignForm, setShowCampaignForm] = useState(false);
     const [editingCampaign, setEditingCampaign] = useState(null);
@@ -219,7 +224,7 @@ const AdminDashboard = () => {
                 {/* Tabs Section */}
                 <div className="card">
                     {/* Tab Headers */}
-                    <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+                    <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
                         <div className="flex gap-2 p-1 bg-slate-900/50 rounded-xl">
                             <button
                                 onClick={() => setActiveTab('campaigns')}
@@ -318,81 +323,131 @@ const AdminDashboard = () => {
                     )}
 
                     {activeTab === 'users' && (
-                        <div className="table-container animate-fadeIn">
-                            <table className="w-full">
-                                <thead className="table-header">
-                                    <tr>
-                                        <th className="table-cell text-left font-semibold">Name</th>
-                                        <th className="table-cell text-left font-semibold">Email</th>
-                                        <th className="table-cell text-left font-semibold">Role</th>
-                                        <th className="table-cell text-left font-semibold">Registered</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-slate-700/50">
-                                    {users.map((u, index) => (
-                                        <tr key={u.id || index} className="table-row">
-                                            <td className="table-cell">
-                                                <div className="flex items-center gap-3">
-                                                    <div className="w-8 h-8 bg-gradient-to-r from-slate-600 to-slate-700 rounded-lg flex items-center justify-center text-white text-sm font-medium">
-                                                        {u.name?.charAt(0).toUpperCase()}
-                                                    </div>
-                                                    <span className="text-white font-medium">{u.name}</span>
-                                                </div>
-                                            </td>
-                                            <td className="table-cell text-slate-300">{u.email}</td>
-                                            <td className="table-cell">
-                                                <span className={`px-3 py-1 rounded-md text-xs font-medium ${u.role === 'admin' ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' : 'bg-slate-600/50 text-slate-300 border border-slate-500/30'}`}>
-                                                    {u.role}
-                                                </span>
-                                            </td>
-                                            <td className="table-cell text-slate-400">{formatDate(u.createdAt)}</td>
+                        <div className="animate-fadeIn">
+                            <div className="table-container">
+                                <table className="w-full">
+                                    <thead className="table-header">
+                                        <tr>
+                                            <th className="table-cell text-left font-semibold">Name</th>
+                                            <th className="table-cell text-left font-semibold">Email</th>
+                                            <th className="table-cell text-left font-semibold">Role</th>
+                                            <th className="table-cell text-left font-semibold">Registered</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody className="divide-y divide-slate-700/50">
+                                        {users.slice((usersPage - 1) * itemsPerPage, usersPage * itemsPerPage).map((u, index) => (
+                                            <tr key={u.id || index} className="table-row">
+                                                <td className="table-cell">
+                                                    <div className="flex items-center gap-3">
+                                                        <div className="w-8 h-8 bg-gradient-to-r from-slate-600 to-slate-700 rounded-lg flex items-center justify-center text-white text-sm font-medium">
+                                                            {u.name?.charAt(0).toUpperCase()}
+                                                        </div>
+                                                        <span className="text-white font-medium">{u.name}</span>
+                                                    </div>
+                                                </td>
+                                                <td className="table-cell text-slate-300">{u.email}</td>
+                                                <td className="table-cell">
+                                                    <span className={`px-3 py-1 rounded-md text-xs font-medium ${u.role === 'admin' ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' : 'bg-slate-600/50 text-slate-300 border border-slate-500/30'}`}>
+                                                        {u.role}
+                                                    </span>
+                                                </td>
+                                                <td className="table-cell text-slate-400">{formatDate(u.createdAt)}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                             {users.length === 0 && (
                                 <div className="text-center py-12 text-slate-400">No users registered yet</div>
+                            )}
+                            {users.length > itemsPerPage && (
+                                <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-700/50">
+                                    <span className="text-slate-400 text-sm">
+                                        Showing {(usersPage - 1) * itemsPerPage + 1} - {Math.min(usersPage * itemsPerPage, users.length)} of {users.length}
+                                    </span>
+                                    <div className="flex gap-2">
+                                        <button
+                                            onClick={() => setUsersPage(p => Math.max(1, p - 1))}
+                                            disabled={usersPage === 1}
+                                            className="px-3 py-1.5 rounded-lg bg-slate-700/50 text-slate-300 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                                        >
+                                            Previous
+                                        </button>
+                                        <button
+                                            onClick={() => setUsersPage(p => Math.min(Math.ceil(users.length / itemsPerPage), p + 1))}
+                                            disabled={usersPage >= Math.ceil(users.length / itemsPerPage)}
+                                            className="px-3 py-1.5 rounded-lg bg-slate-700/50 text-slate-300 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                                        >
+                                            Next
+                                        </button>
+                                    </div>
+                                </div>
                             )}
                         </div>
                     )}
 
                     {activeTab === 'donations' && (
-                        <div className="table-container animate-fadeIn">
-                            <table className="w-full">
-                                <thead className="table-header">
-                                    <tr>
-                                        <th className="table-cell text-left font-semibold">Campaign</th>
-                                        <th className="table-cell text-left font-semibold">Donor</th>
-                                        <th className="table-cell text-left font-semibold">Amount</th>
-                                        <th className="table-cell text-left font-semibold">Status</th>
-                                        <th className="table-cell text-left font-semibold">Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-slate-700/50">
-                                    {donations.map((d, index) => (
-                                        <tr key={d.id || index} className="table-row">
-                                            <td className="table-cell text-white font-medium">{d.campaign?.title || 'N/A'}</td>
-                                            <td className="table-cell">
-                                                <div>
-                                                    <p className="text-white font-medium">{d.user?.name || 'N/A'}</p>
-                                                    <p className="text-slate-400 text-xs">{d.user?.email || ''}</p>
-                                                </div>
-                                            </td>
-                                            <td className="table-cell text-white font-semibold">
-                                                {d.currency === 'INR' ? '₹' : '$'}{d.amount.toLocaleString()}
-                                            </td>
-                                            <td className="table-cell">
-                                                <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium ${getStatusBadge(d.paymentStatus)}`}>
-                                                    {d.paymentStatus.charAt(0).toUpperCase() + d.paymentStatus.slice(1)}
-                                                </span>
-                                            </td>
-                                            <td className="table-cell text-slate-400">{formatDate(d.createdAt)}</td>
+                        <div className="animate-fadeIn">
+                            <div className="table-container">
+                                <table className="w-full">
+                                    <thead className="table-header">
+                                        <tr>
+                                            <th className="table-cell text-left font-semibold">Campaign</th>
+                                            <th className="table-cell text-left font-semibold">Donor</th>
+                                            <th className="table-cell text-left font-semibold">Amount</th>
+                                            <th className="table-cell text-left font-semibold">Status</th>
+                                            <th className="table-cell text-left font-semibold">Date</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody className="divide-y divide-slate-700/50">
+                                        {donations.slice((donationsPage - 1) * itemsPerPage, donationsPage * itemsPerPage).map((d, index) => (
+                                            <tr key={d.id || index} className="table-row">
+                                                <td className="table-cell text-white font-medium">{d.campaign?.title || 'N/A'}</td>
+                                                <td className="table-cell">
+                                                    <div>
+                                                        <p className="text-white font-medium">{d.user?.name || 'N/A'}</p>
+                                                        <p className="text-slate-400 text-xs">{d.user?.email || ''}</p>
+                                                    </div>
+                                                </td>
+                                                <td className="table-cell text-white font-semibold">
+                                                    {d.currency === 'INR' ? '₹' : '$'}{d.amount.toLocaleString()}
+                                                </td>
+                                                <td className="table-cell">
+                                                    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium ${getStatusBadge(d.paymentStatus)}`}>
+                                                        {d.paymentStatus.charAt(0).toUpperCase() + d.paymentStatus.slice(1)}
+                                                    </span>
+                                                </td>
+                                                <td className="table-cell text-slate-400">{formatDate(d.createdAt)}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                             {donations.length === 0 && (
                                 <div className="text-center py-12 text-slate-400">No donations recorded yet</div>
+                            )}
+                            {donations.length > itemsPerPage && (
+                                <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-700/50">
+                                    <span className="text-slate-400 text-sm">
+                                        Showing {(donationsPage - 1) * itemsPerPage + 1} - {Math.min(donationsPage * itemsPerPage, donations.length)} of {donations.length}
+                                    </span>
+                                    <div className="flex gap-2">
+                                        <button
+                                            onClick={() => setDonationsPage(p => Math.max(1, p - 1))}
+                                            disabled={donationsPage === 1}
+                                            className="px-3 py-1.5 rounded-lg bg-slate-700/50 text-slate-300 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                                        >
+                                            Previous
+                                        </button>
+                                        <button
+                                            onClick={() => setDonationsPage(p => Math.min(Math.ceil(donations.length / itemsPerPage), p + 1))}
+                                            disabled={donationsPage >= Math.ceil(donations.length / itemsPerPage)}
+                                            className="px-3 py-1.5 rounded-lg bg-slate-700/50 text-slate-300 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                                        >
+                                            Next
+                                        </button>
+                                    </div>
+                                </div>
                             )}
                         </div>
                     )}

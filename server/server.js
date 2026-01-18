@@ -23,7 +23,7 @@ app.use(cookieParser());
 // CORS configuration - supports credentials with multiple origins
 const allowedOrigins = process.env.CORS_ORIGIN
   ? process.env.CORS_ORIGIN.split(',').map(origin => origin.trim())
-  : ['http://localhost:5173', 'http://localhost:3000'];
+  : ['http://localhost:5173', 'http://localhost:3000', 'http://10.81.53.238:5173'];
 
 app.use(cors({
   origin: function (origin, callback) {

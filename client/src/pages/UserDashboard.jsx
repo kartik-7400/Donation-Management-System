@@ -47,17 +47,22 @@ const UserDashboard = () => {
 
     const fetchData = async () => {
         try {
-            const [historyRes, campaignsRes] = await Promise.all([
-                donationAPI.getHistory(),
-                campaignAPI.getAll()
-            ]);
-            setDonations(historyRes.data.donations);
+            // Fetch campaigns (public endpoint - should always work)
+            const campaignsRes = await campaignAPI.getAll();
             setCampaigns(campaignsRes.data.campaigns);
         } catch (err) {
-            console.error('Error fetching data:', err);
-        } finally {
-            setLoading(false);
+            console.error('Error fetching campaigns:', err);
         }
+
+        try {
+            // Fetch donation history (requires auth)
+            const historyRes = await donationAPI.getHistory();
+            setDonations(historyRes.data.donations);
+        } catch (err) {
+            console.error('Error fetching history:', err);
+        }
+
+        setLoading(false);
     };
 
     const handleDonate = async (e) => {
@@ -303,8 +308,8 @@ const UserDashboard = () => {
                                                 type="button"
                                                 onClick={() => setAmount(quickAmount.toString())}
                                                 className={`py-2.5 rounded-lg transition-all text-sm font-medium ${amount === quickAmount.toString()
-                                                        ? 'bg-emerald-600 text-white'
-                                                        : 'bg-slate-700/50 text-slate-300 hover:bg-slate-700 hover:text-white'
+                                                    ? 'bg-emerald-600 text-white'
+                                                    : 'bg-slate-700/50 text-slate-300 hover:bg-slate-700 hover:text-white'
                                                     }`}
                                             >
                                                 {currency === 'INR' ? '₹' : '$'}{quickAmount >= 1000 ? `${quickAmount / 1000}k` : quickAmount}

@@ -1,7 +1,12 @@
 import axios from 'axios';
 
+// Use the same hostname as the frontend, but port 3000 for the API
+const API_HOST = window.location.hostname;
+const API_PORT = 3000;
+const API_BASE_URL = `http://${API_HOST}:${API_PORT}/api`;
+
 const api = axios.create({
-    baseURL: 'http://localhost:3000/api',
+    baseURL: API_BASE_URL,
     withCredentials: true,
     headers: {
         'Content-Type': 'application/json'
