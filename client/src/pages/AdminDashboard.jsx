@@ -163,7 +163,7 @@ const AdminDashboard = () => {
 
             <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
                 {/* Stats Cards */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div className="m-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div className="card card-hover animate-fadeIn">
                         <div className="flex items-center gap-4">
                             <div className="w-14 h-14 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/25">
@@ -222,9 +222,9 @@ const AdminDashboard = () => {
                 </div>
 
                 {/* Tabs Section */}
-                <div className="card">
+                <div className="m-4 card">
                     {/* Tab Headers */}
-                    <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+                    <div className="flex flex-wrap items-center justify-between gap-4 m-4">
                         <div className="flex gap-2 p-1 bg-slate-900/50 rounded-xl">
                             <button
                                 onClick={() => setActiveTab('campaigns')}
@@ -276,7 +276,7 @@ const AdminDashboard = () => {
                                     No campaigns created yet. Click "New Campaign" to create one.
                                 </div>
                             ) : (
-                                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 m-4">
                                     {campaigns.map((campaign) => (
                                         <div key={campaign.id} className="bg-slate-800/50 rounded-xl overflow-hidden border border-slate-700/50">
                                             {campaign.image ? (

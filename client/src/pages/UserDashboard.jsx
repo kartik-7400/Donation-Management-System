@@ -198,12 +198,12 @@ const UserDashboard = () => {
             </header>
 
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
-                <div className="flex flex-col lg:grid lg:grid-cols-3 gap-4 sm:gap-6">
+                <div className="flex flex-col lg:grid lg:grid-cols-3">
 
                     {/* Left Column - Profile & Donate */}
-                    <div className="flex flex-col gap-4 sm:gap-6 order-1 lg:order-1">
+                    <div className="flex flex-col order-1 lg:order-1">
                         {/* Profile Card */}
-                        <div className="card animate-fadeIn">
+                        <div className="m-4 card animate-fadeIn">
                             <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
                                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl sm:rounded-2xl flex items-center justify-center text-white text-xl sm:text-2xl font-bold flex-shrink-0">
                                     {user?.name?.charAt(0).toUpperCase()}
@@ -228,7 +228,7 @@ const UserDashboard = () => {
                         </div>
 
                         {/* Donate Card */}
-                        <div className="card animate-slideIn p-5 sm:p-6">
+                        <div className="m-4 card animate-slideIn p-5 sm:p-6">
                             <h3 className="text-base sm:text-lg font-semibold text-white mb-5 flex items-center gap-2">
                                 <svg className="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
@@ -352,7 +352,7 @@ const UserDashboard = () => {
 
                     {/* Right Column - History */}
                     <div className="lg:col-span-2 order-2 lg:order-2">
-                        <div className="card min-h-[400px] sm:min-h-[500px]">
+                        <div className="m-4 card min-h-[400px] sm:min-h-[500px]">
                             <h3 className="text-base sm:text-lg font-semibold text-white mb-4 flex items-center gap-2">
                                 <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />

@@ -69,7 +69,7 @@ const CampaignsPage = () => {
 
             {/* Header */}
             <div className="border-b border-slate-700/50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+                <div className="m-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
                     <div className="max-w-2xl">
                         <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">Active Campaigns</h1>
                         <p className="text-slate-400 text-lg">
@@ -96,7 +96,7 @@ const CampaignsPage = () => {
                         <p className="text-slate-400">Check back soon for new campaigns.</p>
                     </div>
                 ) : (
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                    <div className="m-4 grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                         {campaigns.map((campaign) => (
                             <div key={campaign.id} className="card card-hover overflow-hidden">
                                 {campaign.image ? (

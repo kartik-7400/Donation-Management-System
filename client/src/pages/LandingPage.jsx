@@ -112,7 +112,7 @@ const LandingPage = () => {
             {/* Features Section */}
             <section className="py-16 sm:py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                    <div className="m-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                         {/* Feature 1 */}
                         <div className="card card-hover p-6 sm:p-8">
                             <div className="flex items-center gap-4 mb-5">
@@ -164,7 +164,7 @@ const LandingPage = () => {
             {/* Campaigns Preview Section */}
             <section id="campaigns" className="py-16 sm:py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10">
+                    <div className="m-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                         <div>
                             <h2 className="text-3xl font-bold text-white mb-2">Active Campaigns</h2>
                             <p className="text-slate-400">Choose a cause that resonates with you</p>
@@ -229,11 +229,11 @@ const LandingPage = () => {
             {/* Mission Section */}
             <section id="mission" className="py-16 sm:py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl font-bold text-white mb-4">Why Choose HopeConnect?</h2>
-                        <p className="text-slate-400 max-w-2xl mx-auto">We believe in complete transparency and accountability for every donation.</p>
+                    <div className="text-center m-4">
+                        <h2 className="text-3xl font-bold text-white">Why Choose HopeConnect?</h2>
+                        <p className="text-slate-400">We believe in complete transparency and accountability for every donation.</p>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="m-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div className="card card-hover p-6">
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -243,7 +243,7 @@ const LandingPage = () => {
                                 </div>
                                 <h3 className="text-lg font-bold text-white">Our Mission</h3>
                             </div>
-                            <p className="text-slate-400 text-sm">
+                            <p className="text-slate-400">
                                 To connect generous hearts with meaningful causes, ensuring every donation creates lasting positive change.
                             </p>
                         </div>
@@ -258,7 +258,7 @@ const LandingPage = () => {
                                 </div>
                                 <h3 className="text-lg font-bold text-white">Transparency</h3>
                             </div>
-                            <p className="text-slate-400 text-sm">
+                            <p className="text-slate-400">
                                 Complete visibility into how funds are used. Every transaction is recorded and accessible to donors.
                             </p>
                         </div>
@@ -272,7 +272,7 @@ const LandingPage = () => {
                                 </div>
                                 <h3 className="text-lg font-bold text-white">Real Impact</h3>
                             </div>
-                            <p className="text-slate-400 text-sm">
+                            <p className="text-slate-400">
                                 See the real difference your donations make. We share stories and updates from communities you help.
                             </p>
                         </div>
@@ -283,7 +283,7 @@ const LandingPage = () => {
             {/* Stats Section */}
             <section id="stats" className="py-16 sm:py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="card p-8 sm:p-12">
+                    <div className="m-4 card p-8 sm:p-12">
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
                             <div className="text-center">
                                 <p className="text-3xl sm:text-4xl font-bold text-emerald-400">
@@ -319,7 +319,7 @@ const LandingPage = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="bg-gradient-to-r from-emerald-600 to-teal-600 rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
                         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyIi8+PC9nPjwvZz48L3N2Zz4=')] opacity-50"></div>
-                        <div className="relative">
+                        <div className="m-4 relative">
                             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ready to make a difference?</h2>
                             <p className="text-emerald-100 text-lg mb-8 max-w-2xl mx-auto">
                                 Join thousands of donors who are creating lasting change in communities around the world.
