@@ -5,14 +5,15 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
-// Cookie options - for development on HTTP, we need sameSite: 'lax' and secure: false
-// In production with HTTPS, use sameSite: 'none' and secure: true
+// Cookie options for different environments
 const getCookieOptions = () => {
+    const isProduction = process.env.NODE_ENV === 'production';
     const isHTTPS = process.env.HTTPS === 'true';
+
     return {
         httpOnly: true,
-        secure: isHTTPS, // Only true when using HTTPS
-        sameSite: 'lax', // 'lax' works for same-site and top-level navigation
+        secure: isHTTPS || isProduction, // true for HTTPS
+        sameSite: (isHTTPS || isProduction) ? 'none' : 'lax', // 'none' for cross-origin, 'lax' for local
         maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     };
 };
