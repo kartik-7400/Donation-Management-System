@@ -1,9 +1,6 @@
 import axios from 'axios';
 
-// Use the same hostname as the frontend, but port 3000 for the API
-const API_HOST = window.location.hostname;
-const API_PORT = 3000;
-const API_BASE_URL = `http://${API_HOST}:${API_PORT}/api`;
+const API_BASE_URL = import.meta.env.VITE_API_URL || `http://${window.location.hostname}:3000/api`;
 
 const api = axios.create({
     baseURL: API_BASE_URL,

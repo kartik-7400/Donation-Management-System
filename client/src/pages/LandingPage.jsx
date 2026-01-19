@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { statsAPI, campaignAPI } from '../api';
+import { useAuth } from '../context/AuthContext';
 
 const LandingPage = () => {
+    const { user, logout } = useAuth();
     const [stats, setStats] = useState({
         totalMembers: 0,
         totalFundsRaised: 0,
@@ -61,14 +63,36 @@ const LandingPage = () => {
                             <a href="#stats" className="text-slate-300 hover:text-emerald-400 font-medium transition-colors">Impact</a>
                         </div>
 
-                        {/* Auth Buttons */}
+                        {/* Auth Buttons - Show Dashboard if logged in */}
                         <div className="flex items-center gap-2 sm:gap-3">
-                            <Link to="/auth" className="text-slate-300 hover:text-white font-medium px-3 sm:px-4 py-2 text-sm sm:text-base transition-colors">
-                                Log in
-                            </Link>
-                            <Link to="/auth" className="btn-primary px-4 sm:px-6 py-2 text-sm sm:text-base">
-                                Join Us
-                            </Link>
+                            {user ? (
+                                <>
+                                    <Link
+                                        to={user.role === 'admin' ? '/admin' : '/dashboard'}
+                                        className="btn-primary px-4 sm:px-6 py-2 text-sm sm:text-base"
+                                    >
+                                        Dashboard
+                                    </Link>
+                                    <button
+                                        onClick={async () => {
+                                            await logout();
+                                            window.location.href = '/';
+                                        }}
+                                        className="text-slate-300 hover:text-white font-medium px-3 sm:px-4 py-2 text-sm sm:text-base transition-colors"
+                                    >
+                                        Logout
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <Link to="/auth" className="text-slate-300 hover:text-white font-medium px-3 sm:px-4 py-2 text-sm sm:text-base transition-colors">
+                                        Log in
+                                    </Link>
+                                    <Link to="/auth" className="btn-primary px-4 sm:px-6 py-2 text-sm sm:text-base">
+                                        Join Us
+                                    </Link>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
